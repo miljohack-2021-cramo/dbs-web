@@ -2,6 +2,7 @@ Id:
 <input id="dbid" name="id" value="1">
 <br>
 <h3 id="dbverdi"></h3>
+<h3 id="feilmelding"></h3>
 
 <button id="toggle">Start</button>
 
@@ -70,11 +71,13 @@ Id:
             });
     } else {
         console.log("getUserMedia not supported");
+        document.getElementById('feilmelding').textContent = "getUserMedia not supported"
     }
 
     const renderMeter = (average) => {
         if (running) {
             const dbs = Math.round(average);
+            document.getElementById('dbverdi').textContent = `dB: ${dbs}`
             var db = {}
             db.db = dbs;
             db.id = txtDbId;
