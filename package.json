@@ -1,0 +1,24 @@
+{
+  "name": "db-web-sender",
+  "version": "1.0.0",
+  "description": "Rapporterer dB nivåer",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://Olavz@bitbucket.org/Olavz/db-web-sender.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://bitbucket.org/Olavz/db-web-sender/issues"
+  },
+  "homepage": "https://bitbucket.org/Olavz/db-web-sender#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^4.3.1",
+    "supervisor": "^0.12.0"
+  }
+}
