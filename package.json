@@ -17,6 +17,7 @@
   },
   "homepage": "https://bitbucket.org/Olavz/db-web-sender#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "socket.io": "^4.3.1",
     "supervisor": "^0.12.0"
