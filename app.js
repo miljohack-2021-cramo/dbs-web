@@ -7,14 +7,17 @@ const io = new Server(server);
 
 app.use(express.static('public'))
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(__dirname + '/public/dbmaaler.html');
 });
 
 io.on('connection', (socket) => {
     socket.on('db', (msg) => {
         console.log(msg);
+        io.emit('broadcast_dbs', msg);
     });
 });
+
+
 
 server.listen(3000, () => {
     console.log('listening on *:3000');

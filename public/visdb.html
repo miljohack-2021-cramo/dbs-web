@@ -1,0 +1,9 @@
+<script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+    var socket = io();
+
+    socket.on('broadcast_dbs', function(msg) {
+        console.log(msg);
+    });
+
+</script>
