@@ -19,6 +19,7 @@ io.on('connection', (socket) => {
 
 app.get('/api/iot/:id/:db', function (req, res) {
     console.log(`Sendte: ${req.params.id} ${req.params.db}`)
+    io.emit('broadcast_iot_api', `Sendte: ${req.params.id} ${req.params.db}`);
     res.send(`Sendte: ${req.params.id} ${req.params.db}`)
 });
 

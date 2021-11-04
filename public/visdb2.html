@@ -1,0 +1,9 @@
+<script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+    var socket = io();
+
+    socket.on('broadcast_iot_api', function(msg) {
+        console.log(msg);
+    });
+
+</script>
