@@ -41,7 +41,7 @@
             fillColor: resolveColor(item.db),
             fillOpacity: 0.5,
             radius: 30
-        });
+        }).bindTooltip("Id: " + item.id);
     }
 
     function resolveColor(db) {
