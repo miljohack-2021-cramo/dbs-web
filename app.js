@@ -67,10 +67,7 @@ cron.schedule('*/1 * * * * *', () => {
 cron.schedule('*/5 * * * * *', () => {
     Array.from(maksDbs.values()).forEach(function (it) {
         io.emit('broadcast_maks_verdier', it)
-        console.log(it)
     })
-    console.log("__")
-
 });
 
 cron.schedule('* */60 * * * *', () => {

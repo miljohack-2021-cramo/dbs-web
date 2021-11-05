@@ -135,7 +135,7 @@
 
     function visMaksverdier() {
         var bygger = ""
-        dbsMaksVerdier.forEach(function(item) {
+        Array.from(dbsMaksVerdier.values()).sort().forEach(function(item) {
             bygger += `<li>ID: ${item.id} dB: ${item.db} </li>`
         })
         document.getElementById('sisteverdier').innerHTML = `<h3>Maksverdier</h3><ul>${bygger}</ul>`
