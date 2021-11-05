@@ -16,9 +16,14 @@
         crossorigin=""></script>
 
 <div id="map"></div>
-<button id="toggle">Start</button>
+
 <script>
     var mymap = L.map('map').setView([59.9143305, 10.785462], 15);
+
+    /*
+    Dokumentasjon for div tegning på kart.
+    https://leafletjs.com/reference.html#circle-option
+     */
 
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
