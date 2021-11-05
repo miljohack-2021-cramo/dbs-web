@@ -61,6 +61,15 @@ io.on('connection', (socket) => {
         io.emit('broadcast_dbs', simulertDbs)
         oppdaterMaksDb(simulertDbs);
     });
+
+    socket.on('helloworld', (msg) => {
+        if(msg === "asdf") {
+            io.emit('helloworld_start', msg)
+        } else {
+            io.emit('helloworld_start', msg)
+        }
+    });
+
 });
 
 function oppdaterMaksDb(simulertDbs) {
