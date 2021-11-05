@@ -21,6 +21,21 @@ Velg plassering
     var socket = io();
 
 
+    let txtDbId;
+
+    let btnToggle = document.getElementById('toggle');
+    var running = false;
+    btnToggle.addEventListener("click", function () {
+        if (running) {
+            running = false;
+            this.textContent = "Start";
+        } else {
+            txtDbId = document.getElementById('dbid').value
+            running = true;
+            this.textContent = "Stopp";
+        }
+    });
+
     // Inspirert av https://github.com/jchiella/quietdowner/
     navigator.getUserMedia = navigator.getUserMedia ||
         navigator.webkitGetUserMedia ||
