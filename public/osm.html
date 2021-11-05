@@ -40,27 +40,25 @@
     }
 
     function resolveColor(db) {
-        if (db > 0 && db < 15) {
-            return "#01A299"
-        } else if (db > 0 && db < 10) {
+        if (db >= 0 && db < 10) {
             return "#1A9631";
-        } else if (db > 10 && db < 20) {
+        } else if (db >= 10 && db < 20) {
             return "#19A938";
-        } else if (db > 20 && db < 30) {
+        } else if (db >= 20 && db < 30) {
             return "#C2B901";
-        } else if (db > 30 && db < 40) {
-            return "#D2CD00";
-        } else if (db > 40 && db < 50) {
-            return "#EEE90C";
-        } else if (db > 50 && db < 60) {
+        } else if (db >= 30 && db < 40) {
             return "#E18700";
-        } else if (db > 60 && db < 70) {
-            return "#F49600";
-        } else if (db > 70 && db < 80) {
+        } else if (db >= 40 && db < 50) {
             return "#CD5306";
-        } else if (db > 80 && db < 90) {
+        } else if (db >= 50 && db < 60) {
             return "#E42419";
-        } else if (db > 100) {
+        } else if (db >= 60 && db < 70) {
+            return "#A91A24";
+        } else if (db >= 70 && db < 80) {
+            return "#A91A24";
+        } else if (db >= 80 && db < 90) {
+            return "#A91A24";
+        } else if (db >= 100) {
             return "#A91A24";
         }
     }
