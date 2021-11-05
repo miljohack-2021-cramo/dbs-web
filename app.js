@@ -30,7 +30,7 @@ io.on('connection', (socket) => {
         simulertDbs.id = id;
         simulertDbs.lat = valgtLokasjon.lat;
         simulertDbs.lon = valgtLokasjon.lon;
-        simulertDbs.db = msg.db;
+        simulertDbs.db = msg.db * 2.5;
 
         sisteDbs.set(`id_${id}`, simulertDbs)
         io.emit('broadcast_dbs', simulertDbs)
