@@ -1,0 +1,85 @@
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+      crossorigin=""/>
+
+<style>
+    #map {
+        height: 500px;
+    }
+</style>
+
+<script src="/socket.io/socket.io.js"></script>
+
+<!-- Make sure you put this AFTER Leaflet's CSS -->
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+
+<div id="map"></div>
+<button id="toggle">Start</button>
+<script>
+    var mymap = L.map('map').setView([59.9143305, 10.785462], 15);
+
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox/streets-v11',
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: 'pk.eyJ1Ijoib2xhdnoiLCJhIjoiY2t2bGowYW1pMDFmajJ2cjJsd25seHhwYyJ9.fkKO64nRhg_crnvY4i0jKQ'
+    })
+        .addTo(mymap);
+
+    function getCircle(item) {
+        return L.circle([item.lat, item.lon], {
+            color: resolveColor(item.db),
+            fillColor: resolveColor(item.db),
+            fillOpacity: 0.5,
+            radius: 30
+        });
+    }
+
+    function resolveColor(db) {
+        if (db > 0 && db < 15) {
+            return "#01A299"
+        } else if (db > 0 && db < 10) {
+            return "#1A9631";
+        } else if (db > 10 && db < 20) {
+            return "#19A938";
+        } else if (db > 20 && db < 30) {
+            return "#C2B901";
+        } else if (db > 30 && db < 40) {
+            return "#D2CD00";
+        } else if (db > 40 && db < 50) {
+            return "#EEE90C";
+        } else if (db > 50 && db < 60) {
+            return "#E18700";
+        } else if (db > 60 && db < 70) {
+            return "#F49600";
+        } else if (db > 70 && db < 80) {
+            return "#CD5306";
+        } else if (db > 80 && db < 90) {
+            return "#E42419";
+        } else if (db > 100) {
+            return "#A91A24";
+        }
+    }
+
+    var socket = io();
+
+    var circles = new Map();
+    socket.on('broadcast_siste_verdier', function (msg) {
+
+        if (circles.has(msg.id)) {
+            circles.get(msg.id).remove()
+            let newCircle = getCircle(msg)
+            circles.set(msg.id, newCircle)
+            newCircle.addTo(mymap);
+        } else {
+            let newCircle = getCircle(msg)
+            circles.set(msg.id, newCircle)
+            newCircle.addTo(mymap);
+        }
+    });
+
+</script>

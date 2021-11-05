@@ -1,5 +1,13 @@
-Id:
-<input id="dbid" name="id" value="1">
+Velg plassering
+<select name="id" id="dbid">
+    <option value="1">Lokasjon 1</option>
+    <option value="2">Lokasjon 2</option>
+    <option value="3">Lokasjon 3</option>
+    <option value="4">Lokasjon 4</option>
+    <option value="5">Lokasjon 5</option>
+    <option value="6">Lokasjon 6</option>
+    <option value="7">Lokasjon 7</option>
+</select>
 <br>
 <h3 id="dbverdi"></h3>
 <h3 id="feilmelding"></h3>
@@ -12,21 +20,6 @@ Id:
 
     var socket = io();
 
-
-    let txtDbId;
-
-    let btnToggle = document.getElementById('toggle');
-    var running = false;
-    btnToggle.addEventListener("click", function () {
-        if (running) {
-            running = false;
-            this.textContent = "Start";
-        } else {
-            txtDbId = document.getElementById('dbid').value
-            running = true;
-            this.textContent = "Stop";
-        }
-    });
 
     // Inspirert av https://github.com/jchiella/quietdowner/
     navigator.getUserMedia = navigator.getUserMedia ||
