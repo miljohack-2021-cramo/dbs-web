@@ -22,6 +22,7 @@ let lokasjoner = [
 ]
 
 var sisteDbs = new Map();
+var maksDbs = new Map();
 io.on('connection', (socket) => {
     socket.on('db', (msg) => {
         let simulertDbs = {}
@@ -34,8 +35,20 @@ io.on('connection', (socket) => {
 
         sisteDbs.set(`id_${id}`, simulertDbs)
         io.emit('broadcast_dbs', simulertDbs)
+        oppdaterMaksDb(simulertDbs);
     });
 });
+
+function oppdaterMaksDb(simulertDbs) {
+    if(maksDbs.has(simulertDbs.id)) {
+        let db = maksDbs.get(simulertDbs.id).db;
+        if(db < simulertDbs.db) {
+            maksDbs.set(simulertDbs.id, simulertDbs);
+        }
+    } else {
+        maksDbs.set(simulertDbs.id, simulertDbs);
+    }
+}
 
 app.get('/api/iot/:id/:db', function (req, res) {
     console.log(`Sendte: ${req.params.id} ${req.params.db}`)
@@ -49,6 +62,20 @@ cron.schedule('*/1 * * * * *', () => {
         io.emit('broadcast_siste_verdier', it)
     })
     sisteDbs = new Map();
+});
+
+cron.schedule('*/5 * * * * *', () => {
+    Array.from(maksDbs.values()).forEach(function (it) {
+        io.emit('broadcast_maks_verdier', it)
+        console.log(it)
+    })
+    console.log("__")
+
+});
+
+cron.schedule('* */60 * * * *', () => {
+    maksDbs = new Map();
+    console.log("clearing")
 });
 
 server.listen(3000, () => {

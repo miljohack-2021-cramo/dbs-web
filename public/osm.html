@@ -1,3 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title>Dashboard</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <p> </p>
+    </div>
+    <div class="row">
+        <div class="col-10">
+            <div class="widget" id="map"></div>
+        </div>
+        <div class="col-sm">
+            <div id="sisteverdier">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
+</html>
+
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
       integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
       crossorigin=""/>
@@ -5,6 +38,14 @@
 <style>
     #map {
         height: 500px;
+    }
+    body {
+        background: #F5F6F6;
+    }
+    .widget {
+        padding: 5px;
+        border-radius: 10px;
+        border: 1px solid #333;
     }
 </style>
 
@@ -15,7 +56,7 @@
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
         crossorigin=""></script>
 
-<div id="map"></div>
+
 
 <script>
     var mymap = L.map('map').setView([59.9143305, 10.785462], 15);
@@ -84,5 +125,20 @@
             newCircle.addTo(mymap);
         }
     });
+
+    var dbsMaksVerdier = new Map();
+    socket.on('broadcast_maks_verdier', function (msg) {
+        dbsMaksVerdier.set(msg.id, msg);
+    });
+
+    setInterval(visMaksverdier, 2000);
+
+    function visMaksverdier() {
+        var bygger = ""
+        dbsMaksVerdier.forEach(function(item) {
+            bygger += `<li>ID: ${item.id} dB: ${item.db} </li>`
+        })
+        document.getElementById('sisteverdier').innerHTML = `<h3>Maksverdier</h3><ul>${bygger}</ul>`
+    }
 
 </script>
