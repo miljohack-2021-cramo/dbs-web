@@ -18,6 +18,7 @@
   "homepage": "https://bitbucket.org/Olavz/db-web-sender#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "node-cron": "^3.0.0",
     "socket.io": "^4.3.1",

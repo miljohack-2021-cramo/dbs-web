@@ -2,8 +2,11 @@ const express = require('express');
 const app = express();
 const http = require('http');
 const server = http.createServer(app);
-const {Server} = require("socket.io");
-const io = new Server(server);
+const io = require("socket.io")(server, {
+    cors: {
+        origin: "*:*"
+    }
+});
 var cron = require('node-cron');
 
 app.get('/', (req, res) => {
@@ -52,7 +55,7 @@ io.on('connection', (socket) => {
         simulertDbs.id = id;
         simulertDbs.lat = valgtLokasjon.lat;
         simulertDbs.lon = valgtLokasjon.lon;
-        simulertDbs.db = msg.db * 2.5;
+        simulertDbs.db = msg.db * 1.5;
 
         sisteDbs.set(`id_${id}`, simulertDbs)
         io.emit('broadcast_dbs', simulertDbs)
