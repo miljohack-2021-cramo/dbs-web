@@ -107,7 +107,7 @@ cron.schedule('*/5 * * * * *', () => {
     })
 });
 
-cron.schedule('* */60 * * * *', () => {
+cron.schedule('*/15 * * * *', () => {
     maksDbs = new Map();
     console.log("clearing")
 });
