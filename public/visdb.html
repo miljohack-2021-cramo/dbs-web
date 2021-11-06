@@ -10,11 +10,11 @@
         if (running) {
             running = false;
             this.textContent = "Start";
-            socket.emit('helloworld', "asdf");
+            socket.emit('helloworld', "fdsa");
         } else {
             running = true;
             this.textContent = "Stopp";
-            socket.emit('helloworld', "fdsa");
+            socket.emit('helloworld', "asdf");
         }
     });
 

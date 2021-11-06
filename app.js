@@ -13,6 +13,10 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/dbmaaler.html')
 });
 
+app.get('/helloworld', (req, res) => {
+    res.sendFile(__dirname + '/public/duck.mp3')
+});
+
 app.use((req, res, next) => {
     const auth = {login: 'admin', password: 'admin'}
 
