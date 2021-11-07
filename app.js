@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 app.get('/helloworld', (req, res) => {
     res.sendFile(__dirname + '/public/duck.mp3')
 });
-
+/*
 app.use((req, res, next) => {
     const auth = {login: 'admin', password: 'admin'}
 
@@ -34,7 +34,7 @@ app.use((req, res, next) => {
     res.set('WWW-Authenticate', 'Basic realm="401"') // change this
     res.status(401).send('Authentication required.') // custom message
 });
-
+*/
 app.use(express.static('public'))
 
 
